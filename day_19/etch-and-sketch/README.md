@@ -13,4 +13,5 @@ A = left
 C = clear game
 
 
+## Screenshot of a drawing made in the game
 ![](./game-screenshot.PNG)
