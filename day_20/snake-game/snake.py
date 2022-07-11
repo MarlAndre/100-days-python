@@ -1,4 +1,5 @@
 from turtle import Turtle
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 PACE = 20
 UP = 90
 RIGHT = 0
@@ -14,13 +15,20 @@ class Snake:
 
 # Create initial body
     def create_body(self):
-        for i in range(3):
-            snake_segment = Turtle("square")
-            snake_segment.color("white")
-            snake_segment.penup()
-            x_offset = -20 * len(self.snake_body)
-            snake_segment.goto(x_offset, 0)
-            self.snake_body.append(snake_segment)
+        for position in STARTING_POSITIONS:
+            self.add_segment(position)
+
+    def add_segment(self, position):
+        snake_segment = Turtle("square")
+        snake_segment.color("white")
+        snake_segment.penup()
+        # position = (-20 * len(self.snake_body), 0)
+        snake_segment.goto(position)
+        self.snake_body.append(snake_segment)
+
+    def extend(self):
+        # add segment to snake
+        self.add_segment(self.snake_body[-1].position())
 
 # Make snake move
     def move(self):
