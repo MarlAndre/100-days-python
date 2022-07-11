@@ -5,8 +5,8 @@ RIGHT = 0
 DOWN = 270
 LEFT = 180
 
-class Snake:
 
+class Snake:
     def __init__(self):
         self.snake_body = []
         self.create_body()

@@ -1,6 +1,8 @@
 import time
 from turtle import Screen
 from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -10,6 +12,8 @@ screen.title("My Snake Game")
 screen.tracer(0)
 
 snake = Snake()
+food = Food()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, 'Up')
@@ -26,8 +30,15 @@ while game_is_on:
     screen.update()
     # 1. Will delay by x sec after the whole body moved
     time.sleep(0.1)
-
     snake.move()
+    scoreboard.score_update()
 
+    # Detect collision with food. To do this, we use the first segment of the snake(head)
+    # if the segment is in a distance of less than 15 pixel from food, they collide
+    if snake.head.distance(food) < 15:
+        food.refresh()
+        scoreboard.clear()
+        scoreboard.score += 1
+        scoreboard.score_update()
 
 screen.exitonclick()
